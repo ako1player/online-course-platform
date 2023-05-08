@@ -1,4 +1,4 @@
-import { Grid, Flex, Modal, TextInput, Stack } from "@mantine/core";
+import { Grid, Flex, Modal, TextInput, Stack, Textarea } from "@mantine/core";
 import { type Course } from "@prisma/client";
 import { type NextPage } from "next";
 import Head from "next/head";
@@ -65,7 +65,7 @@ const Courses: NextPage = () => {
           createCourseForm.reset();
           await courses.refetch();
           })}>
-          <Stack mb="2">
+          <Stack>
           <TextInput
             required
             withAsterisk
@@ -73,7 +73,8 @@ const Courses: NextPage = () => {
             placeholder="title"
             {...createCourseForm.getInputProps("title")}
           />
-          <TextInput
+          <Textarea
+            minRows={6}
             required
             withAsterisk
             label="dedscription"
