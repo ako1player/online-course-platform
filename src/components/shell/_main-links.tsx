@@ -8,13 +8,13 @@ const links = [
     icon: <IconDashboard size="1rem" />,
     color: "red",
     label: "Dashboard",
-    href: "/",
+    href: "/dashboard",
   },
   {
     icon: <IconPencil size="1rem" />,
     color: "blue",
     label: "Manage Course",
-    href: "/courses",
+    href: "/dashboard/courses",
   },
 ];
 

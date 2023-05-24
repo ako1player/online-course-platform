@@ -8,6 +8,17 @@ import {
 } from "~/server/api/trpc";
 
 export const courseRouter = createTRPCRouter({
+  getCourseById: protectedProcedure.input(z.object({
+    courseId: z.string(),
+    })
+  )
+    .query(({ctx, input}) =>{
+      return ctx.prisma.course.findUnique({
+        where: {
+          id: input.courseId,
+        },
+      });
+    }),
   getCourse: protectedProcedure
     .query(({ctx}) =>{
       return ctx.prisma.course.findMany({
@@ -29,4 +40,19 @@ export const courseRouter = createTRPCRouter({
             });
             return newCourse;
         }),
+  updateCourse: protectedProcedure
+  .input(z.object({ title: z.string(), courseId: z.string() }))
+  .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      await ctx.prisma.course.updateMany({
+        where: {
+          id: input.courseId,
+          userId,
+        },
+          data: {
+              title: input.title,
+              }
+          });
+          return {status: "updated"};
+      }),
 });

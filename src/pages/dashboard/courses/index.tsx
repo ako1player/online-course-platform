@@ -7,6 +7,7 @@ import { Card as MantineCard, Image, Text, Badge, Button, Group } from '@mantine
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from '@mantine/form';
 import { api } from "~/utils/api";
+import Link from "next/link";
 
 export function CourseCard({course}: {course: Course}) {
   return (
@@ -30,7 +31,13 @@ export function CourseCard({course}: {course: Course}) {
         {course.description}
       </Text>
 
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+      <Button
+        component={Link}
+        href={`/dashboard/courses/${course.id}`}
+        variant="light" 
+        color="blue" 
+        fullWidth mt="md" 
+        radius="md">
         Manage
       </Button>
     </MantineCard>
